@@ -113,7 +113,7 @@ const ChatBot = () => {
         throw new Error("Please provide both weather and occasion");
       }
 
-      const response = await axios.post("http://localhost:5000/recommend", { 
+      const response = await axios.post("http://localhost:8000/recommend", { 
         weather, 
         occasion 
       });
