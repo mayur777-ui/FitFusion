@@ -7,8 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// console.log(process.env.Chat);
 const HUGGING_FACE_API_KEY = process.env.HUGGING_FACE_API_KEY;
-
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+console.log("🔑 API Keys Loaded:", !!HUGGING_FACE_API_KEY, !!OPENROUTER_API_KEY);
 // Function to create the prompt
 const createPrompt = (weather, occasion) => `
 You are a senior fashion designer. Generate an outfit recommendation for ${weather} weather and a ${occasion} event.
@@ -24,8 +26,6 @@ You are a senior fashion designer. Generate an outfit recommendation for ${weath
   "accessories": "[Item1] and [Item2]",
   "style_reason": "[Concise explanation]"
 }
-
-### OUTPUT:
 `;
 
 // Function to extract JSON content after "### OUTPUT:"
@@ -33,48 +33,42 @@ function extractJsonFromResponse(text) {
   try {
     console.log("🔍 Raw AI Response:", text);
 
-    // Find the position of '### OUTPUT:'
-    const outputIndex = text.indexOf("### OUTPUT:");
-    if (outputIndex === -1) throw new Error("No '### OUTPUT:' found in AI response");
-
-    // Extract the text after '### OUTPUT:'
-    const jsonText = text.slice(outputIndex + "### OUTPUT:".length).trim();
-
-    // Extract only the JSON part using regex
-    const jsonMatch = jsonText.match(/\{[\s\S]*?\}/);
+    // Directly try to extract JSON from the response text
+    const jsonMatch = text.match(/\{[\s\S]*?\}/);
     if (!jsonMatch) throw new Error("No valid JSON found");
 
+    // Clean the JSON string by removing extra backslashes
+    const cleanedJson = jsonMatch[0].replace(/\\/g, '');
+    
     // Parse and return JSON
-    return JSON.parse(jsonMatch[0]);
+    return JSON.parse(cleanedJson);
   } catch (error) {
     console.error("🚨 JSON Extraction Error:", error.message);
     return { error: "Invalid AI response format" };
   }
 }
 
-// Function to call Hugging Face API and get outfit recommendations
 async function getOutfitRecommendation(weather, occasion) {
   try {
     const response = await axios.post(
-      "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1",
+      "https://openrouter.ai/api/v1/chat/completions",
       {
-        inputs: createPrompt(weather, occasion),
-        parameters: {
-          max_new_tokens: 200,
-          temperature: 0.7,
-          repetition_penalty: 1.2
-        }
+        model: "deepseek/deepseek-chat-v3-0324", // Ensure this is the correct model ID
+        messages: [
+          { role: "system", content: "You are an AI fashion assistant providing outfit recommendations." },
+          { role: "user", content: createPrompt(weather, occasion) }
+        ],
+        max_tokens: 200,
+        temperature: 0.7
       },
       {
-        headers: { Authorization: `Bearer ${HUGGING_FACE_API_KEY}` },
-        timeout: 10000 // 10-second timeout
+        headers: { Authorization: `Bearer ${OPENROUTER_API_KEY}` },
+        timeout: 10000
       }
     );
 
     console.log("🔍 AI Response:", response.data);
-
-    // Extract and return the cleaned JSON output
-    return extractJsonFromResponse(response.data[0].generated_text);
+    return extractJsonFromResponse(response.data.choices[0].message.content);
   } catch (error) {
     console.error("🚨 API Error:", error.response?.data || error.message);
     return { error: "AI service unavailable, try again later." };
