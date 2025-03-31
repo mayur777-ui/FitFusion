@@ -113,7 +113,7 @@ const ChatBot = () => {
         throw new Error("Please provide both weather and occasion");
       }
 
-      const response = await axios.post("http://localhost:8  000/recommend", { 
+      const response = await axios.post("http://localhost:8000/recommend", { 
         weather, 
         occasion 
       });
@@ -128,6 +128,7 @@ const ChatBot = () => {
       ]);
 
     } catch (err) {
+      console.log(err);
       setError(err.response?.data?.error || err.message);
       setMessages(prev => [...prev, { 
         sender: "bot", 
