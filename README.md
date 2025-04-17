@@ -48,10 +48,6 @@ StyleGenius AI is a chatbot that helps you pick the perfect outfit based on the 
 
 ---
 
-## 📸 Screenshots (Optional)
-> Add images of your chatbot UI here!
-
----
 
 ## 🌟 How It Works
 
