@@ -16,12 +16,11 @@ A sophisticated AI-powered fashion recommendation platform that combines machine
   - User preference tracking
   - Style trend analysis
   - Recommendation performance metrics
-  - A/B testing capabilities
+ 
 
 - **Professional Features**
   - Secure user authentication
   - Real-time weather integration
-  - Multi-language support
   - Responsive design
   - Dark/Light mode
 
@@ -31,8 +30,7 @@ A sophisticated AI-powered fashion recommendation platform that combines machine
   - React 18 with Vite
   - TailwindCSS for styling
   - Framer Motion for animations
-  - React Query for data fetching
-  - Zustand for state management
+
 
 - **Backend**
   - Node.js with Express
@@ -89,8 +87,6 @@ npm run dev
 - Secure API endpoints
 - Rate limiting
 - Input validation
-- XSS protection
-- CSRF protection
 
 ## 📊 Analytics
 
@@ -114,14 +110,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-- Project Lead: [Your Name]
-- Backend Developer: [Your Name]
-- Frontend Developer: [Your Name]
-- AI Engineer: [Your Name]
-
+- Project Lead: Mayur Lakshkar
+- Backend Developer: [Mayur Lakshkar,Aakash Murya]
+- Frontend Developer: [[Mayur Lakshkar,Aakash Murya]
 ## 📞 Support
 
-For support, email support@stylegenius.com or join our [Discord community](https://discord.gg/stylegenius).
+For support, email mayurlaxkar76@gmail.com
 
 ---
 
@@ -191,7 +185,7 @@ This project is licensed under the **MIT License**.
 ## 💬 Contact
 For any questions or feedback, reach out at:  
 📧 Email: your.email@example.com  
-🐦 Twitter: [@yourhandle](https://twitter.com/yourhandle)  
+🐦 Twitter: [@yourhandle](https://x.com/MayurLaksh61145)  
 
 ---
 
