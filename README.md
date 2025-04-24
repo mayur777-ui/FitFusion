@@ -1,6 +1,6 @@
 # StyleGenius AI - Advanced Fashion Recommendation System
 
-![StyleGenius Logo](frontend/public/logo.png)
+![StyleGenius Logo](frontend/public/icon.png)
 
 A sophisticated AI-powered fashion recommendation platform that combines machine learning, real-time weather data, and style analysis to provide personalized outfit suggestions.
 
