@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const hpp = require('hpp');
+// const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 require('dotenv').config();
@@ -42,7 +42,7 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Prevent parameter pollution
-app.use(hpp());
+// app.use(hpp());
 
 // Rate limiting
 const limiter = rateLimit({
